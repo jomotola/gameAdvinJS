@@ -48,10 +48,10 @@ function init_game() {
 
 	// base path from baseline/index.html to common images directory
 	_game.imagedir = "../images/";
-    _game.imagedir_player = "../images/player/";
-    _game.imagedir_backgrounds = "../images/backgrounds/";
-    _game.imagedir_monsters = "../images/monsters/";
-    _game.imagedir_items = "../images/items/";
+    _game.imagedir_player = _game.imagedir + "player/";
+	_game.imagedir_backgrounds = _game.imagedir + "backgrounds/";
+	_game.imagedir_monsters = _game.imagedir + "monsters/";
+	_game.imagedir_items = _game.imagedir + "items/";
 
 	// Font for canvas text
 	_game.font_family = 'TheWildBreathOfZelda';
@@ -225,7 +225,6 @@ function init_level1() {
         [10, 190, 100, 20, "block"],
         [420, 270, 100, 20, "block"],
     ];
-    
 	add_platforms(level, platform_data);
 
 	//create the monsters
@@ -444,7 +443,6 @@ function add_default_platforms(level) {
 		//The right offstage 'wall' to keep the player on the stage.
 		[_game.width, -_game.height, 60, 2 * _game.height, "#000000"],
 	];
-	
 	add_platforms(level, platform_data);
 }
 
@@ -773,9 +771,9 @@ function draw() {
         ctx.fillStyle = "black";
         ctx.font = "48px Helvetica";
 		if  (_game.game_win) {
-			ctx.fillText("You Win!", 155, 150)
+			ctx.fillText("You Win!", 270, 220)
 		} else {
-			ctx.fillText("Game Over", 140, 150);
+			ctx.fillText("Game Over", 270, 220);
 		}
     }
 }
@@ -792,23 +790,20 @@ function draw_platforms(ctx) {
 	var platforms = level.platforms;
 	for (var i = 0; i < platforms.length; i++) {
 		var platform = platforms[i];
+
 		set_transform(ctx, platform);
-        if (platform.background_color) {
-            ctx.fillStyle = platform.background_color;
-            ctx.fillRect(0, 0, platform.width, platform.height);
-            ctx.strokeStyle = "rgba(0,0,0,0.5)";
-            ctx.strokeRect(0, 0, platform.width, platform.height);
-        } else if (platform.pattern && platform.pattern.complete) {
-            var pat = ctx.createPattern(platform.pattern, "repeat");
-            ctx.fillStyle = pat;
-            ctx.fillRect(0, 0, platform.width, platform.height);
-        } else {
-            // fallback if pattern not loaded
-            ctx.fillStyle = "#888888";
-            ctx.fillRect(0, 0, platform.width, platform.height);
-        }
-        reset_transform(ctx);
-	}   
+		if (platform.background_color) {
+			ctx.fillStyle = platform.background_color;
+			ctx.fillRect(0, 0, platform.width, platform.height);
+			ctx.strokeStyle = "rgba(0,0,0,0.5)";
+			ctx.strokeRect(0, 0, platform.width, platform.height);
+		} else {
+			var pat = ctx.createPattern(platform.pattern, "repeat");
+			ctx.fillStyle = pat;
+			ctx.fillRect(0, 0, platform.width, platform.height);
+		}
+		reset_transform(ctx);
+	}
 	
 	if (level.name != "") {
         ctx.fillStyle = "rgb(50, 50, 50)";
