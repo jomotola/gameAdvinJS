@@ -44,3 +44,5 @@ Navigate through multiple levels, defeat monsters, and progress through an excit
 - [ ] Sound effects and background music
 - [ ] Additional levels
 
+Completion of this JavaScript book:
+https://github.com/garykac/advinjs
