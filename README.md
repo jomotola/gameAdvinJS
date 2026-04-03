@@ -15,18 +15,12 @@ Navigate through multiple levels, defeat monsters, and progress through an excit
 - **Keyboard controls** - Responsive keyboard input handling
 - **Custom assets** - Themed fonts and organized sprite management
 
-## How to Play
-
 ### Controls
 
 - **Arrow Keys (Left & Right)** - Move character
 - **Space/Up Arrow Key** - Jump
 
-
-## Project Structure
-
-
-## Technology Stack
+## Languages Ised
 
 - **HTML** - Page structure
 - **CSS** - Basic Styling and layout
