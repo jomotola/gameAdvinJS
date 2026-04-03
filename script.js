@@ -47,7 +47,7 @@ function init_game() {
 	_game.keymap = {};
 
 	// base path from baseline/index.html to common images directory
-	_game.imagedir = "../images/";
+	_game.imagedir = "/images/";
     _game.imagedir_player = _game.imagedir + "player/";
 	_game.imagedir_backgrounds = _game.imagedir + "backgrounds/";
 	_game.imagedir_monsters = _game.imagedir + "monsters/";
