@@ -1,6 +1,6 @@
 @font-face {
 	font-family: 'TheWildBreathOfZelda';
-	src: url('../fonts/The Wild Breath of Zelda.otf') format('opentype');
+	src: url('fonts/The Wild Breath of Zelda.otf') format('opentype');
 }
 
 body {
