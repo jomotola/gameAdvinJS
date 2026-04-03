@@ -28,16 +28,9 @@ Navigate through multiple levels, defeat monsters, and progress through an excit
 
 ## Technology Stack
 
-- **HTML5** - Page structure
-- **CSS3** - Basic Styling and layout
-- **Vanilla JavaScript** - Game engine
-
-## Levels
-
-- **Level 0** - Title screen
-- **Level 1** - [Description]
-- **Level 2** - [Description]
-- **Level 3** - [Description]
+- **HTML** - Page structure
+- **CSS** - Basic Styling and layout
+- **JavaScript** - Game engine
 
 ## Future Enhancements
 
