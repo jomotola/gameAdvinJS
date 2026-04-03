@@ -379,7 +379,7 @@ function init_level3() {
         [80, 260, 26, 28, 15, 280, -1.0, "prescott"],
         [380, 130, 40, 24, 330, 460, 0.5, [["falco1", 10], ["falco2", 10]]],
         [200, 360, 38, 24, 150, 450, 1.0,
-            [["octoboss1", 10], ["octoboss2", 10], ["octoboss3", 10], ["octoboss2", 10]],
+            [["octoboss1", 10], ["octoboss2", 10], ["octoboss3", 10], ["octoboss2", 10]]
             ],
     ];
     add_monsters(level, monster_data);
