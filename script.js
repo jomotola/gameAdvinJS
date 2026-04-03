@@ -1,33 +1,3 @@
-// This is called ~60 times per second to update the world.
-function update_world() {
-	var level = _levels[_game.current_level];
-
-	if (_game.in_transition) {
-		draw_transition_screen();
-	} else if (level.type == "game") {
-		update_monsters();
-		update_platforms();
-		update_items();
-		update_player();
-		check_collisions();
-		draw();
-	} else if (level.type === "title") {
-		draw_title_screen();
-	}
-
-	requestAnimationFrame(update_world);
-}
-
-setup();
-
-// Fallback in case the load event has already fired
-if (document.readyState === "loading") {
-	// DOM is still loading, setup() will handle it via the load event
-} else {
-	// DOM is already loaded, manually trigger initialization
-	handle_load();
-}
-
 // Global variables.
 var _game = {};
 var _player = {};
@@ -1272,4 +1242,24 @@ function collide(obj1, obj2) {
 	}
 }
 
+// This is called ~60 times per second to update the world.
+function update_world() {
+	var level = _levels[_game.current_level];
 
+	if (_game.in_transition) {
+		draw_transition_screen();
+	} else if (level.type == "game") {
+		update_monsters();
+		update_platforms();
+		update_items();
+		update_player();
+		check_collisions();
+		draw();
+	} else if (level.type === "title") {
+		draw_title_screen();
+	}
+
+	requestAnimationFrame(update_world);
+}
+
+setup();
