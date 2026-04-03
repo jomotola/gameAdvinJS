@@ -53,6 +53,9 @@ function init_game() {
     _game.imagedir_monsters = "../images/monsters/";
     _game.imagedir_items = "../images/items/";
 
+	// Font for canvas text
+	_game.font_family = 'TheWildBreathOfZelda';
+
 	//game state (win/lose, platforms, monsters, goal, levels)
 	_game.game_over = false;
 	_game.game_win = false;
@@ -810,7 +813,7 @@ function draw_platforms(ctx) {
 	if (level.name != "") {
         ctx.fillStyle = "rgb(50, 50, 50)";
         ctx.font = "28px " + _game.font_family;
-        ctx.fillText(level.name, 10, 390);
+        ctx.fillText(level.name, 40, 390);
     }
 }
 
@@ -904,7 +907,7 @@ function draw_status(ctx) {
 	ctx.drawImage(_game.img_coin, _game.width - 58, 11);
     ctx.fillStyle = "#606060";
     ctx.font = "16px Helvetica";
-    ctx.fillText("x" + _player.coins, _game.width - 37, 26);
+    ctx.fillText("x" + _player.coins, _game.width - 24, 26);
 
 	//Draw player icons to indicate how many extra lives remain.
 	for (var i = 0; i < _game.player_lives-1; i++) {
@@ -925,14 +928,15 @@ function draw_title_screen() {
 
     erase(ctx);
     ctx.fillStyle = "black";
-    ctx.font = "28px " + _game.font_family;
-    ctx.fillText("The Legend of", 75, 130);
+    ctx.textAlign = "center";
+    ctx.font = "40px " + _game.font_family;
+    ctx.fillText("Monster", canvas.width / 2, 125);
 
-    ctx.font = "64px " + _game.font_family;
-    ctx.fillText("JavaScript", 115, 180);
+    ctx.font = "80px " + _game.font_family;
+    ctx.fillText("Adventure", canvas.width / 2, 180);
 
     ctx.font = "20px " + _game.font_family;
-    ctx.fillText("PRESS THE SPACE KEY TO START", 90, 350);
+    ctx.fillText("PRESS THE SPACE KEY TO START", canvas.width / 2, 350);
 
     draw_monsters(ctx);
 }
@@ -971,14 +975,14 @@ function draw_transition_screen() {
 
     ctx.fillStyle = "white";
     ctx.font = "64px Helvetica";
-    ctx.fillText(level.name, 160, 180);
+    ctx.fillText(level.name, 280, 180);
 
     ctx.fillStyle = "white";
     ctx.font = "48px Helvetica";
     if (type == "level-end") {
-        ctx.fillText("Complete!", 150, 250);
+        ctx.fillText("Complete!", 270, 250);
     } else {
-        ctx.fillText("Get Ready!", 140, 250);
+        ctx.fillText("Get Ready!", 280, 250);
     }
 
 }

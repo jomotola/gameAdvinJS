@@ -1,9 +1,15 @@
+@font-face {
+	font-family: 'TheWildBreathOfZelda';
+	src: url('../fonts/The Wild Breath of Zelda.otf') format('opentype');
+}
+
 body {
 	background-color: blue;
 	color: white;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	font-family: 'TheWildBreathOfZelda', Arial, sans-serif;
 }
 
 canvas {
