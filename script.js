@@ -1131,14 +1131,6 @@ function check_input() {
             _game.audio_jump.play();
 		}
 	}
-	// Pause/resume with 'P' key
-	if (_game.keymap[80] && !_game.pause_key_pressed) {
-		_game.paused = !_game.paused;
-		_game.pause_key_pressed = true;
-	}
-	if (!_game.keymap[80]) {
-		_game.pause_key_pressed = false;
-	}
 	
 }
 
@@ -1289,6 +1281,15 @@ function collide(obj1, obj2) {
 // This is called ~60 times per second to update the world.
 function update_world() {
 	var level = _levels[_game.current_level];
+
+	// Check for pause key input even while paused
+	if (_game.keymap[80] && !_game.pause_key_pressed) {
+		_game.paused = !_game.paused;
+		_game.pause_key_pressed = true;
+	}
+	if (!_game.keymap[80]) {
+		_game.pause_key_pressed = false;
+	}
 
 	if (_game.in_transition) {
 		draw_transition_screen();
