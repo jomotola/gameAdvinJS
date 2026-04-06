@@ -76,6 +76,7 @@ function init_game() {
 	_game.in_transition = false;
 	_game.reset_health = false;
 	_game.player_lives = 3;
+    _game.paused = false;
 
 	//global world parameters
 	_game.friction = 0.15;
@@ -777,6 +778,18 @@ function draw() {
 	draw_player(ctx);
 	draw_status(ctx);
 
+    if (_game.paused) {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
+        ctx.fillRect(0, 0, _game.width, _game.height);
+        ctx.fillStyle = "white";
+        ctx.font = "64px Helvetica";
+        ctx.textAlign = "center";
+        ctx.fillText("PAUSED", _game.width / 2, _game.height / 2);
+        ctx.font = "20px Helvetica";
+        ctx.fillText("Press P to Resume", _game.width / 2, _game.height / 2 + 50);
+        ctx.textAlign = "start";
+    }
+
 	if (_game.game_over) {
         // Dim out the stage by drawing a transparent black rectangle over it.
         ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
@@ -949,6 +962,11 @@ function draw_title_screen() {
     ctx.font = "20px " + _game.font_family;
     ctx.fillText("PRESS THE SPACE KEY TO START", canvas.width / 2, 350);
 
+    // Add instructions
+    ctx.font = "16px " + _game.font_family;
+    ctx.fillText("Arrow Keys / WASD to Move", canvas.width / 2, 370);
+    ctx.fillText("Space to Jump | P to Pause", canvas.width / 2, 390);
+
     draw_monsters(ctx);
 }
 
@@ -1112,6 +1130,11 @@ function check_input() {
             _game.audio_jump.play();
 		}
 	}
+    // Pause/resume with 'P' key
+    if (_game.keymap[80]) {  // 80 is keyCode for 'P'
+        _game.paused = !_game.paused;
+        _game.keymap[80] = false;  // Prevent toggling every frame
+    }
 	
 }
 
@@ -1266,12 +1289,14 @@ function update_world() {
 	if (_game.in_transition) {
 		draw_transition_screen();
 	} else if (level.type == "game") {
-		update_monsters();
-		update_platforms();
-		update_items();
-		update_player();
-		check_collisions();
-		draw();
+        if (!_game.paused) {
+            update_monsters();
+            update_platforms();
+            update_items();
+            update_player();
+            check_collisions();
+        }
+        draw();
 	} else if (level.type === "title") {
 		draw_title_screen();
 	}
