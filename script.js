@@ -56,6 +56,18 @@ function init_game() {
 	// Font for canvas text
 	_game.font_family = 'TheWildBreathOfZelda';
 
+    //game sound effects
+    _game.sounddir = "sound-effects/";
+    _game.audio_jump = new Audio(_game.sounddir + "sprite-jump.mp3");
+    _game.audio_coin = new Audio(_game.sounddir + "coin-collect.mp3");
+    _game.audio_game_over = new Audio(_game.sounddir + "game-over.mp3");
+    _game.audio_game_win = new Audio(_game.sounddir + "game-win.mp3");
+    _game.audio_death = new Audio(_game.sounddir + "sprite-death.mp3");
+    _game.audio_level_up = new Audio(_game.sounddir + "level-up.mp3");
+    _game.audio_key = new Audio(_game.sounddir + "collect-key.mp3");
+    _game.audio_potion = new Audio(_game.sounddir + "potion-drink.mp3");
+    _game.audio_hurt = new Audio(_game.sounddir + "hurt_sound.mp3");
+
 	//game state (win/lose, platforms, monsters, goal, levels)
 	_game.game_over = false;
 	_game.game_win = false;
@@ -689,6 +701,7 @@ function start_level(level_id) {
 }
 
 function complete_level(next_level) {
+    _game.audio_level_up.play();
 	var level = _levels[_game.current_level];
 	
 	if (level.complete) 
@@ -714,6 +727,7 @@ function lose_life() {
 		_game.next_level = _game.current_level;
 	} else {
 		_game.game_over = true;
+        _game.audio_game_over.play();
 	}
 }
 
@@ -772,8 +786,10 @@ function draw() {
         ctx.font = "48px Helvetica";
 		if  (_game.game_win) {
 			ctx.fillText("You Win!", 270, 220)
+            _game.audio_game_win.play();
 		} else {
 			ctx.fillText("Game Over", 270, 220);
+            _game.audio_game_over.play();
 		}
     }
 }
@@ -1093,6 +1109,7 @@ function check_input() {
 		if (_player.platform) {
 			_player.platform = null;
 			_player.velocity_y = _player.velocity_y_jump;
+            _game.audio_jump.play();
 		}
 	}
 	
@@ -1155,11 +1172,13 @@ function check_monster_collisions() {
             if (p.active && collide(p, _player)) {
                 damage += 5;
                 p.active = false;
+
             }
         }
 	}
 	if (damage != 0) {
 		adjust_health(-damage);
+        _game.audio_hurt.play();
 	}
 }
 
@@ -1173,14 +1192,17 @@ function check_item_collisions() {
 				if (item.type == "key") {
                     level.player_has_key = true;
 					item.found = true;
+                    _game.audio_key.play();
 				} else if (item.type == "potion") {
                     if (item.value >= item.consume_rate) {
                         adjust_health(item.consume_rate);
                         item.value -= item.consume_rate;
+                        _game.audio_potion.play();
                     }
 				} else if (item.type == "coin") {
                     _player.coins++;
 					item.found = true;
+                    _game.audio_coin.play();
                 } else if (item.type == "finish") {
 					item.found = true;
                     _game.game_over = true;
