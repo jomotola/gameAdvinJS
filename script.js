@@ -77,6 +77,7 @@ function init_game() {
 	_game.reset_health = false;
 	_game.player_lives = 3;
     _game.paused = false;
+    _game.pause_key_pressed = false;
 
 	//global world parameters
 	_game.friction = 0.15;
@@ -1130,11 +1131,14 @@ function check_input() {
             _game.audio_jump.play();
 		}
 	}
-    // Pause/resume with 'P' key
-    if (_game.keymap[80]) {  // 80 is keyCode for 'P'
-        _game.paused = !_game.paused;
-        _game.keymap[80] = false;  // Prevent toggling every frame
-    }
+	// Pause/resume with 'P' key
+	if (_game.keymap[80] && !_game.pause_key_pressed) {
+		_game.paused = !_game.paused;
+		_game.pause_key_pressed = true;
+	}
+	if (!_game.keymap[80]) {
+		_game.pause_key_pressed = false;
+	}
 	
 }
 
